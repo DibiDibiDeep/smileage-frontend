@@ -1,32 +1,106 @@
+:root {
+    --primary-color: #ffd1a9; /* 부드러운 오렌지 톤 */
+    --secondary-color: #ffe8a1; /* 연한 노란색 */
+    --accent-color: #f18383; /* 밝은 파스텔 핑크 */
+    --text-color: #666666; /* 연한 회색 */
+    --background-color: #fffaf0; /* 부드러운 크림색 */
+  }
+
+.apps {
+    background: linear-gradient(to bottom, var(--background-color), var(--primary-color));
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+    color: var(--text-color);
+}
+  
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-left: 110px;
+    margin-right: 70px;
+}
+  
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navBox{
+    margin: 0 auto;
+    background-color: var(--accent-color);
+    width: 50%;
+    height: 100%;
+    border: none;
+    border-radius: 30px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 13px;
+}
+  
+nav a {
+    color: var(--background-color);
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+  }
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-color: #f8f9fa;
+    margin-top: -70px;
 }
 
 .containerBox {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 800px;
-    padding: 20px;
-}
-
-.boxWrapper {
-    display: flex;
-    flex-direction: column;
+    flex-direction: row; /* 좌우 배치 */
     align-items: center;
     width: 100%;
 }
 
 .mainText {
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1;
+    margin-left: 120px;
+}
+
+.sun{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+}
+
+.ball{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+}
+
+.text{
+    margin: 0 auto;
+    margin-left: 150px;
+}
+
+.text p{
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
 }
 
 .logo1 {
@@ -39,14 +113,42 @@
     height: auto;
 }
 
+.btn1 {
+  background-color: #FFA500;
+  border-radius: 25px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  transition: background-color 0.3s, transform 0.1s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn1:hover{
+    background-color: #FF8C00;
+}
+
+.btn1:active{
+    transform: scale(0.98);
+}
+.arrow{
+    margin-left: 8px;
+    font-size: 12px;
+}
+
 .line1 {
-    width: 100%;
+    width: 80%;
     border: 0;
     border-top: 1px solid #dee2e6;
     margin: 20px 0;
 }
-
 .camBox {
+    flex: 1;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -57,6 +159,7 @@
     position: relative;
     width: 100%;
     max-width: 600px;
+    right: 250px;
 }
 
 .video {
@@ -75,17 +178,6 @@
     z-index: 10;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
     pointer-events: none;
-}
-
-.btn1 {
-    margin-top: 20px;
-    border: none;
-    width: 100px;
-    height: 40px;
-    border-radius: 5px;
-    background-color: #ff9f00;
-    color: white;
-    font-weight: bold;
 }
 
 .modalBox{
