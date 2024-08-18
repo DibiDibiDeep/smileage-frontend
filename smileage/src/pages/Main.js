@@ -14,14 +14,13 @@ const emotionTranslations = {
 };
 
 const translateEmotion = (emotion) => {
-    return emotionTranslations[emotion] || emotion; // 매핑이 없으면 원래 감정 이름을 반환
+    return emotionTranslations[emotion] || emotion;
 };
 
 function Main() {
     const videoRef = useRef(null);
     const [predictions, setPredictions] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [message, setMessage] = useState('');
     const [countdown, setCountdown] = useState(0);
     const [capturedImage, setCapturedImage] = useState(null);
     const [displayedProbability, setDisplayedProbability] = useState(0);
@@ -84,8 +83,6 @@ function Main() {
             setShowModal(true);
         } catch (error) {
             console.error('Error sending image to server:', error.response ? error.response.data : error.message);
-            setMessage(`Error: ${error.response?.data?.error || 'Unknown error occurred'}`);
-            setShowModal(true);
         }
     };
 
@@ -114,74 +111,97 @@ function Main() {
                 emotionProbability = end;
                 clearInterval(interval);
             }
-            setDisplayedProbability(emotionProbability.toFixed(2)); // 소수점 둘째 자리까지
-        }, 30); // 30ms마다 업데이트 
+            setDisplayedProbability(emotionProbability.toFixed(2));
+        }, 30);
     };
 
     return (
         <>
-            <div className={styles.container}>
-                <div className={styles.containerBox}>
-                    <div className={styles.boxWrapper}>
+            <div className={styles.apps}>
+                <header>
+                    <div className={styles.logo}>Smileage</div>
+                    <div className={styles.navBox}>
+                        <nav className={styles.nav}>
+                            <a href="#home">HOME</a>
+                            <a href="#apps">APPS</a>
+                            <a href="#stories">STORIES</a>
+                            <a href="#about">ABOUT</a>
+                        </nav>
+                    </div>
+                    <button className={styles.signIn}>SIGN IN</button>
+                </header>
+
+                <div className={styles.container}>
+                    <div className={styles.containerBox}>
+                        {/* 왼쪽 텍스트 영역 */}
                         <div className={styles.mainText}>
-                            <div className={styles.logo1}>
-                                <img src='./img/logo2.png' alt="Logo" />
+                            <div className={styles.text}>
+                                <img src='./img/Sun.png' className={styles.sun}/>
+                                <img src='./img/Ball.png' className={styles.ball}/>
+                                <p>TRAINING<br />YOUR<br />FACE!</p>
+                                <div className={styles.btnBox}>
+                                    <button onClick={captureImage} className={styles.btn1}>CAPTURE
+                                    <span className={styles.arrow}>▶</span>
+                                    </button>
+                                </div>
                             </div>
                             <hr className={styles.line1} />
-                            <div className={styles.camBox}>
-                                <div className={styles.videoWrapper}>
-                                    <video className={styles.video} ref={videoRef}></video>
-                                    {countdown > 0 && (
-                                        <div className={styles.countdownOverlay}>
-                                            {countdown}
-                                        </div>
-                                    )}
-                                </div>
-                                <button onClick={captureImage} className={styles.btn1}>Capture</button>
-                            </div>
-                            <Modal show={showModal} className={styles.modalBox}>
-                                <Modal.Body className={styles.modalContent}>
-                                    {capturedImage && (
-                                        <div className={styles.imagePreview}>
-                                            <img src={capturedImage} alt="Captured" className={styles.capturedImage} />
-                                        </div>
-                                    )}
-                                    <div className={styles.emotionResult}>
-                                        <div>
-                                            Smileage #1
-                                        </div>
-                                        {predictions.length > 0 && (
-                                            <>
-                                                <div className={styles.progressCircle}>
-                                                    <svg>
-                                                        <circle cx="70" cy="70" r="60"></circle>
-                                                        <circle
-                                                            cx="70"
-                                                            cy="70"
-                                                            r="60"
-                                                            style={{
-                                                                strokeDashoffset: `calc(377 - (377 * ${displayedProbability}) / 100)`
-                                                            }}
-                                                        ></circle>
-                                                    </svg>
-                                                    <div className={styles.percentage}>{translateEmotion(predictions[0].class)}: {Math.round(predictions[0].probability * 100)}%</div>
-                                                    
-                                                </div>
-                                            </>
-                                        )}
+                        </div>
+
+                        {/* 오른쪽 비디오 영역 */}
+                        <div className={styles.camBox}>
+                            <div className={styles.videoWrapper}>
+                                <video className={styles.video} ref={videoRef}></video>
+                                {countdown > 0 && (
+                                    <div className={styles.countdownOverlay}>
+                                        {countdown}
                                     </div>
-                                </Modal.Body>
-                                <Modal.Footer className={styles.buttonContainer}>
-                                    <Button variant="secondary" onClick={handleClose} className={styles.closeBtn}>
-                                        Close
-                                    </Button>
-                                    <Button variant="primary" onClick={handleSave} className={styles.saveBtn}>
-                                        Save
-                                    </Button>
-                                </Modal.Footer>
-                            </Modal>
+                                )}
+                            </div>
+                            
                         </div>
                     </div>
+
+                    <Modal show={showModal} onHide={handleClose} className={styles.modalBox}>
+                        <Modal.Body className={styles.modalContent}>
+                            {capturedImage && (
+                                <div className={styles.imagePreview}>
+                                    <img src={capturedImage} alt="Captured" className={styles.capturedImage} />
+                                </div>
+                            )}
+                            <div className={styles.emotionResult}>
+                                <div>
+                                    Smileage #1
+                                </div>
+                                {predictions.length > 0 && (
+                                    <>
+                                        <div className={styles.progressCircle}>
+                                            <svg>
+                                                <circle cx="70" cy="70" r="60"></circle>
+                                                <circle
+                                                    cx="70"
+                                                    cy="70"
+                                                    r="60"
+                                                    style={{
+                                                        strokeDashoffset: `calc(377 - (377 * ${displayedProbability}) / 100)`
+                                                    }}
+                                                ></circle>
+                                            </svg>
+                                            <div className={styles.percentage}>{translateEmotion(predictions[0].class)}: {Math.round(predictions[0].probability * 100)}%</div>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        </Modal.Body>
+                        <Modal.Footer className={styles.buttonContainer}>
+                            <Button variant="secondary" onClick={handleClose} className={styles.closeBtn}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={handleSave} className={styles.saveBtn}>
+                                Save
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
             </div>
         </>
