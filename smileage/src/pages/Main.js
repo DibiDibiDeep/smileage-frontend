@@ -4,13 +4,15 @@ import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 import styles from './Main.module.css';
 import html2canvas from 'html2canvas';
+import { useNavigate } from 'react-router-dom';
 
 const emotionTranslations = {
     "happy": "행복",
     "sad": "슬픔",
     "angry": "화남",
     "surprise": "놀람",
-    "neutral": "평온"
+    "neutral": "평온",
+    "fear":"두려움"
 };
 
 const translateEmotion = (emotion) => {
@@ -24,6 +26,8 @@ function Main() {
     const [countdown, setCountdown] = useState(0);
     const [capturedImage, setCapturedImage] = useState(null);
     const [displayedProbability, setDisplayedProbability] = useState(0);
+
+    const navigate = useNavigate();
 
     const getUserCamera = () => {
         navigator.mediaDevices.getUserMedia({ video: true })
@@ -115,41 +119,27 @@ function Main() {
         }, 30);
     };
 
+    const handleClick = () => {
+        navigate('/'); // 버튼 클릭 시 '/'으로 이동
+      };
+
     return (
         <>
             <div className={styles.apps}>
+            <img src='./img/back.png' className={styles.back}/>
                 <header>
-                    <div className={styles.logo}>Smileage</div>
-                    <div className={styles.navBox}>
-                        <nav className={styles.nav}>
-                            <a href="#home">HOME</a>
-                            <a href="#apps">APPS</a>
-                            <a href="#stories">STORIES</a>
-                            <a href="#about">ABOUT</a>
-                        </nav>
-                    </div>
-                    <button className={styles.signIn}>SIGN IN</button>
+                    <div className={styles.logo} onClick={handleClick} style={{display: 'flex', left: '10%'}}>Smileage</div>
+                    <img src='./img/Sun.png' className={styles.sun}/>
                 </header>
 
                 <div className={styles.container}>
                     <div className={styles.containerBox}>
-                        {/* 왼쪽 텍스트 영역 */}
+                        <div className={styles.camBox}>
                         <div className={styles.mainText}>
                             <div className={styles.text}>
-                                <img src='./img/Sun.png' className={styles.sun}/>
-                                <img src='./img/Ball.png' className={styles.ball}/>
-                                <p>TRAINING<br />YOUR<br />FACE!</p>
-                                <div className={styles.btnBox}>
-                                    <button onClick={captureImage} className={styles.btn1}>CAPTURE
-                                    <span className={styles.arrow}>▶</span>
-                                    </button>
-                                </div>
+                                <p>TRAINING YOUR FACE!</p>
                             </div>
-                            <hr className={styles.line1} />
                         </div>
-
-                        {/* 오른쪽 비디오 영역 */}
-                        <div className={styles.camBox}>
                             <div className={styles.videoWrapper}>
                                 <video className={styles.video} ref={videoRef}></video>
                                 {countdown > 0 && (
@@ -157,8 +147,12 @@ function Main() {
                                         {countdown}
                                     </div>
                                 )}
+                                <div className={styles.btnBox}>
+                                    <button onClick={captureImage} className={styles.btn1}>CAPTURE
+                                    <span className={styles.arrow}>▶</span>
+                                    </button>
+                                </div>
                             </div>
-                            
                         </div>
                     </div>
 
@@ -170,9 +164,6 @@ function Main() {
                                 </div>
                             )}
                             <div className={styles.emotionResult}>
-                                <div>
-                                    Smileage #1
-                                </div>
                                 {predictions.length > 0 && (
                                     <>
                                         <div className={styles.progressCircle}>
