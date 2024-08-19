@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, Button, Modal, TextField } from '@mui/material';
+import { Box, Button, Modal, TextField, Typography } from '@mui/material';
 import styles from './CustomModal.module.css';
 import { ThemeProvider } from "@mui/material/styles";
-import Typography from '@mui/material/Typography';
 import theme from "../styles/theme";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -44,7 +43,7 @@ function CustomModal({ open, onClose, onProceed }) {
     const socket = new WebSocket('ws://localhost:8000/ws');
 
     socket.onopen = () => {
-      console.log('WebSocket connection established');
+      console.log('WebSocket connected');
     };
 
     socket.onmessage = (event) => {
