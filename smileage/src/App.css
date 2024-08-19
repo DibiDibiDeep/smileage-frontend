@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+@font-face {
+	font-family: "Poppins";
+    src: url('./assets/fonts/Poppins-Medium.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: "WalterTurncoat";
+    src: url('./assets/fonts/WalterTurncoat-Regular.ttf') format('truetype');
+}
+
+/* Karla-Italic */
+@font-face {
+	font-family: "Karla";
+    src: url('./assets/fonts/Karla-Regular.ttf') format('truetype');
+}
+
+/* Karla-Italic */
+@font-face {
+	font-family: "GloriaHallelujah";
+    src: url('./assets/fonts/GloriaHallelujah-Regular.ttf') format('truetype');
+}

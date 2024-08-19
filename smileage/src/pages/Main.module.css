@@ -38,6 +38,7 @@ header {
     position: relative;
     font-size: 24px;
     font-weight: bold;
+    font-family: 'GloriaHallelujah';
     cursor: pointer;
 }
 
@@ -89,10 +90,12 @@ nav a {
     position: fixed;
     width: 2%;
     left: 16%;
+    margin-left: 5px;
 }
 
 .text{
     margin: 0 auto;
+    
 }
 
 .text p{
@@ -103,6 +106,7 @@ nav a {
     justify-content: center;
     font-size: 50px;
     font-weight: 700;
+    font-family: 'Karla';
 }
 
 .logo1 {
@@ -260,7 +264,7 @@ nav a {
 .modalContent ul {
     list-style-type: none;
     padding: 0;
-  }
+}
 
 
 /* 원형 게이지 스타일 */

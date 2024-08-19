@@ -17,7 +17,6 @@ function LandingPage() {
 
   const handleProceed = () => {
     // onProceed 로직: 예를 들어, 닉네임을 저장하거나 다음 페이지로 이동하는 코드
-    console.log('Next button clicked! Proceed to the next step.');
     navigate('/main');
     // handleCloseModal(); // 모달을 닫는 예시
   };
@@ -25,8 +24,10 @@ function LandingPage() {
   return (
     <div className={styles.smileagePage}>
       <main>
-        <h1 className={styles.title1}>Welcome to <br />Smileage</h1>
-        <p>Earn mileages with every smile!</p>
+        <div className={styles.textContainer}>
+          <h1 className={styles.title1}>Welcome to <br />Smileage</h1>
+          <p>Earn mileages with every smile!</p>
+        </div>
         <div className={styles.buttons}>
           <button className={styles.primary} onClick={handleClick}>Start Training</button>
         </div>

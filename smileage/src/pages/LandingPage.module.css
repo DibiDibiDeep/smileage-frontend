@@ -42,6 +42,15 @@
     text-align: center;
     z-index: 10;
   }
+
+  main .textContainer {
+    margin-top: 200px;
+    font-family: 'Karla';
+  }
+
+  main .textContainer h1 {
+    font-weight: bold;
+  }
   
   h1 {
     font-size: 48px;

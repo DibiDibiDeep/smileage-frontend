@@ -5,29 +5,29 @@
     transform: translate(-50%, -50%);
     width: 400px;
     background-color: #fff;
-    box-shadow: 24px 24px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 16px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 8px;
 }
-  
+
 .webcam {
     width: 100%;
     height: auto;
     margin-bottom: 16px;
 }
-  
+
 .nicknameInput {
     width: 100%;
     padding: 8px;
     margin-bottom: 16px;
     font-size: 1rem;
 }
-  
+
 .nextButton {
     margin-top: 16px;
-    border-radius: 20px;
+    border-radius: 12px; /* Adjust the value to make the button corners rounded */
 }

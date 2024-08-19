@@ -56,6 +56,7 @@ function CustomModal({ open, onClose, onProceed }) {
           />
           <Button
             variant="outlined"
+            color="secondary"
             onClick={onProceed}
             className={styles.nextButton}
           >

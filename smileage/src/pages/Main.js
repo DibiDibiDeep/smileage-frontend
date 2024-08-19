@@ -5,6 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 import styles from './Main.module.css';
 import html2canvas from 'html2canvas';
 import { useNavigate } from 'react-router-dom';
+import '../App.css'
 
 const emotionTranslations = {
     "happy": "행복",
@@ -137,7 +138,7 @@ function Main() {
                         <div className={styles.camBox}>
                         <div className={styles.mainText}>
                             <div className={styles.text}>
-                                <p>TRAINING YOUR FACE!</p>
+                                <p>Training Your Face!</p>
                             </div>
                         </div>
                             <div className={styles.videoWrapper}>
