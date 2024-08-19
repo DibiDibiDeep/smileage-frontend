@@ -1,0 +1,61 @@
+.modalBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.webcam {
+    width: 100%;
+    height: auto;
+    margin-bottom: 16px;
+}
+
+.nicknameInput {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    font-size: 1rem;
+}
+
+.nextButton {
+    margin-top: 16px;
+    border-radius: 12px;
+    /* Adjust the value to make the button corners rounded */
+}
+
+.selectionScreen {
+    display: flex;
+    flex-direction: column;
+    /* Stack buttons vertically */
+    align-items: center;
+    /* Center align buttons horizontally */
+    justify-content: center;
+    /* Center align content vertically */
+    height: 100%;
+    /* Ensure full height */
+    width: 100%;
+    /* Ensure full width */
+}
+
+.selectionButton {
+    width: 100%;
+    /* Full width of the container */
+    margin: 10px 0;
+    /* Space between buttons */
+    max-width: 300px;
+    /* Optional: Limit max width of the buttons */
+}
+
+.userType {
+    font-size: 20px;
+}

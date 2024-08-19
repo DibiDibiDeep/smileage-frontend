@@ -1,10 +1,15 @@
 :root {
-    --primary-color: #ffd1a9; /* 부드러운 오렌지 톤 */
-    --secondary-color: #ffe8a1; /* 연한 노란색 */
-    --accent-color: #f18383; /* 밝은 파스텔 핑크 */
-    --text-color: #666666; /* 연한 회색 */
-    --background-color: #fffaf0; /* 부드러운 크림색 */
-  }
+    --primary-color: #ffd1a9;
+    /* 부드러운 오렌지 톤 */
+    --secondary-color: #ffe8a1;
+    /* 연한 노란색 */
+    --accent-color: #f18383;
+    /* 밝은 파스텔 핑크 */
+    --text-color: #666666;
+    /* 연한 회색 */
+    --background-color: #fffaf0;
+    /* 부드러운 크림색 */
+}
 
 .apps {
     background: linear-gradient(to bottom, var(--background-color), var(--primary-color));
@@ -15,28 +20,38 @@
     position: relative;
     overflow: hidden;
     color: var(--text-color);
+    background-image: src('./img/back.png');
 }
-  
+
+.back {
+    display: flex;
+    position: absolute;
+
+}
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 30px;
     margin-bottom: 50px;
-    margin-left: 110px;
     margin-right: 70px;
 }
-  
+
 .logo {
+    display: flex;
+    position: relative;
     font-size: 24px;
     font-weight: bold;
+    font-family: 'GloriaHallelujah';
+    cursor: pointer;
 }
 
-.navBox{
+.navBox {
     margin: 0 auto;
     background-color: var(--accent-color);
     width: 50%;
-    height: 100%;
+    height: 50px;
     border: none;
     border-radius: 30px;
 }
@@ -46,25 +61,24 @@ header {
     justify-content: space-evenly;
     padding-top: 13px;
 }
-  
+
 nav a {
     color: var(--background-color);
     text-align: center;
     align-items: center;
     justify-content: space-around;
-  }
+}
 
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    margin-top: -70px;
+    min-height: 100vh;
+    margin-top: -100px;
 }
 
 .containerBox {
     display: flex;
-    flex-direction: row; /* 좌우 배치 */
     align-items: center;
     width: 100%;
 }
@@ -72,35 +86,32 @@ nav a {
 .mainText {
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
     align-items: center;
     flex: 1;
-    margin-left: 120px;
 }
 
-.sun{
+.sun {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30%;
+    position: fixed;
+    width: 2%;
+    left: 16%;
+    margin-left: 5px;
 }
 
-.ball{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30%;
-}
-
-.text{
+.text {
     margin: 0 auto;
-    margin-left: 150px;
+
 }
 
-.text p{
+.text p {
+    display: flex;
+    position: relative;
     text-align: center;
-    font-size: 40px;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
     font-weight: 700;
+    font-family: 'Karla';
 }
 
 .logo1 {
@@ -114,39 +125,36 @@ nav a {
 }
 
 .btn1 {
-  background-color: #FFA500;
-  border-radius: 25px;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  transition: background-color 0.3s, transform 0.1s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #FFA500;
+    border-radius: 25px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 5%;
+    width: 100%;
 }
 
-.btn1:hover{
+.btn1:hover {
     background-color: #FF8C00;
 }
 
-.btn1:active{
+.btn1:active {
     transform: scale(0.98);
 }
-.arrow{
+
+.arrow {
     margin-left: 8px;
     font-size: 12px;
 }
 
-.line1 {
-    width: 80%;
-    border: 0;
-    border-top: 1px solid #dee2e6;
-    margin: 20px 0;
-}
 .camBox {
     flex: 1;
     position: relative;
@@ -156,10 +164,8 @@ nav a {
 }
 
 .videoWrapper {
-    position: relative;
     width: 100%;
     max-width: 600px;
-    right: 250px;
 }
 
 .video {
@@ -180,12 +186,12 @@ nav a {
     pointer-events: none;
 }
 
-.modalBox{
+.modalBox {
     border-radius: 40px;
 }
 
 .modalContent {
-    background-color: #ff9f00;
+    background: var(--primary-color);
     border-radius: 5px;
     color: white;
 }
@@ -216,22 +222,22 @@ nav a {
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 20px;
-    color: whitesmoke;
-  }
-  
+    color: var(--text-color);
+}
+
 .mainEmotion {
     font-size: 28px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 15px;
 }
-  
+
 .otherEmotions {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
-  
+
 .emotionItem {
     border-radius: 10px;
     padding: 10px;
@@ -245,7 +251,8 @@ nav a {
     justify-content: space-between;
 }
 
-.closeBtn, .saveBtn {
+.closeBtn,
+.saveBtn {
     background-color: white;
     border: none;
     color: #ff9f00;
@@ -257,14 +264,15 @@ nav a {
     margin: 0 10px;
 }
 
-.closeBtn:hover, .saveBtn:hover {
+.closeBtn:hover,
+.saveBtn:hover {
     background-color: #ff9f00;
 }
 
 .modalContent ul {
     list-style-type: none;
     padding: 0;
-  }
+}
 
 
 /* 원형 게이지 스타일 */
@@ -287,7 +295,7 @@ nav a {
     height: 100%;
     fill: none;
     stroke-width: 20;
-    stroke: #ff9f00;
+    stroke: var(--primary-color);
     cx: 70;
     cy: 70;
     r: 60;
@@ -296,10 +304,13 @@ nav a {
 }
 
 .progressCircle circle:nth-child(2) {
-    stroke: white; /* 게이지 색상 */
+    stroke: white;
+    /* 게이지 색상 */
     stroke-linecap: round;
-    stroke-dashoffset: 377; /* 초기 상태에서 가려진 상태 */
-    transition: stroke-dashoffset 1s ease; /* 애니메이션 */
+    stroke-dashoffset: 377;
+    /* 초기 상태에서 가려진 상태 */
+    transition: stroke-dashoffset 1s ease;
+    /* 애니메이션 */
 }
 
 .percentage {
@@ -309,4 +320,25 @@ nav a {
     transform: translate(-50%, -50%);
     font-size: 14px;
     font-weight: bold;
+}
+
+.modalContent {
+    max-height: 400px;
+    /* 모달 창 높이를 적절히 조절 */
+    overflow-y: auto;
+    /* 스크롤바 추가 */
+    padding: 10px;
+    /* 적절한 패딩 */
+    background-color: #fff;
+    color: black;
+    margin-top: 20px;
+}
+
+.chartWrapper {
+    max-width: 200px;
+    /* 도넛 차트의 최대 너비 */
+    max-height: 200px;
+    /* 도넛 차트의 최대 높이 */
+    margin: 0 auto;
+    /* 중앙 정렬 */
 }
