@@ -31,3 +31,22 @@
     margin-top: 16px;
     border-radius: 12px; /* Adjust the value to make the button corners rounded */
 }
+
+.selectionScreen {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center align buttons horizontally */
+    justify-content: center; /* Center align content vertically */
+    height: 100%; /* Ensure full height */
+    width: 100%; /* Ensure full width */
+}
+  
+.selectionButton {
+    width: 100%; /* Full width of the container */
+    margin: 10px 0; /* Space between buttons */
+    max-width: 300px; /* Optional: Limit max width of the buttons */
+}
+
+.userType {
+    font-size: 20px;
+}
