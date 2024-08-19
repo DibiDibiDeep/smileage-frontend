@@ -24,6 +24,19 @@ function Main() {
     const [countdown, setCountdown] = useState(0);
     const [capturedImage, setCapturedImage] = useState(null);
     const [displayedProbability, setDisplayedProbability] = useState(0);
+    const [users, setUsers] = useState([]);
+    const [smileages, setSmileages] = useState([]);
+
+    useEffect(() => {
+      axios.get('http://localhost:8000/users')
+        .then(response => {
+          setUsers(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }, []);
+  
 
     const getUserCamera = () => {
         navigator.mediaDevices.getUserMedia({ video: true })
@@ -115,6 +128,26 @@ function Main() {
         }, 30);
     };
 
+    useEffect(() => {
+        // 사용자 리스트를 가져오는 API 호출
+        axios.get('http://localhost:8000/users')
+          .then(response => {
+            setUsers(response.data);
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+      
+        // 감정 기록을 가져오는 API 호출
+        axios.get('http://localhost:8000/smileages')
+          .then(response => {
+            setSmileages(response.data);
+          })
+          .catch(error => {
+            console.error('Error fetching smileages:', error);
+          });
+      }, []);
+
     return (
         <>
             <div className={styles.apps}>
@@ -202,6 +235,22 @@ function Main() {
                             </Button>
                         </Modal.Footer>
                     </Modal>
+
+                    <h1>사용자 목록</h1>
+                        <ul>
+                            {users.map(user => (
+                             <li key={user.id}>{user.name}</li>
+                            ))}
+                        </ul>
+
+                        <h2>감정 기록</h2>
+                            <ul>
+                            {smileages.map((smileage) => (
+                                <li key={smileage.id}>
+                                사용자 코드: {smileage.userCode} | 감정: {translateEmotion(smileage.emotion)} | 확률: {Math.round(smileage.probability * 100)}%
+                                </li>
+                            ))}
+                            </ul>
                 </div>
             </div>
         </>
