@@ -310,3 +310,18 @@ nav a {
     font-size: 14px;
     font-weight: bold;
 }
+
+.modalContent {
+    max-height: 400px; /* 모달 창 높이를 적절히 조절 */
+    overflow-y: auto; /* 스크롤바 추가 */
+    padding: 10px; /* 적절한 패딩 */
+    background-color: #fff;
+    color: black;
+    margin-top: 20px;
+}
+
+.chartWrapper {
+    max-width: 200px; /* 도넛 차트의 최대 너비 */
+    max-height: 200px; /* 도넛 차트의 최대 높이 */
+    margin: 0 auto; /* 중앙 정렬 */
+}
