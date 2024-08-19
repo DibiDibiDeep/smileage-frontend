@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout1 from './layouts/Layout1';
 import Main from './pages/Main';
+import CustomModal from './pages/CustomModal'
 import LandingPage from './pages/LandingPage';
 
 function App() {
