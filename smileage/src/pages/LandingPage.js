@@ -34,8 +34,8 @@ function LandingPage() {
       </main>
       <img src='./img/3dimg2.png' className={styles.flag} />
 
-      <CustomModal 
-        open={isModalOpen} 
+      <CustomModal
+        open={isModalOpen}
         onClose={handleCloseModal}
         onProceed={handleProceed}
       />

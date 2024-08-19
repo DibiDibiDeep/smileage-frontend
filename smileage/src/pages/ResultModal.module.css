@@ -8,9 +8,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1300; /* MUI Modal default z-index */
-  }
-  
+    z-index: 1300;
+    /* MUI Modal default z-index */
+}
+
 .modalContent {
     position: relative;
     width: 80%;
@@ -20,20 +21,21 @@
     padding: 16px;
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* 스크롤바 추가 */
+    overflow-y: auto;
+    /* 스크롤바 추가 */
 }
-  
+
 .modalHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-  
+
 .modalTitle {
     font-size: 1.25rem;
     font-weight: 700;
 }
-  
+
 .modalClose {
     cursor: pointer;
 }
@@ -44,4 +46,3 @@
     border-radius: 8px;
     margin-bottom: 20px;
 }
-

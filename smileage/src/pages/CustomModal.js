@@ -45,6 +45,10 @@ function CustomModal({ open, onClose, onProceed }) {
     setUserType(type); // Set user type to "new" or "existing"
   };
 
+  const handleProceed = () => {
+    onProceed(userType);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Modal
@@ -57,7 +61,7 @@ function CustomModal({ open, onClose, onProceed }) {
           {userType === null ? (
             // Initial screen with options for New User or Existing User
             <div>
-              <p className={styles.userType}> 사용자 종류를 선택해주세요 </p>
+              <p className={styles.userType}>사용자 종류를 선택해주세요</p>
               <div className={styles.selectionScreen}>
                 <Button
                   variant="outlined"
@@ -77,9 +81,10 @@ function CustomModal({ open, onClose, onProceed }) {
                 </Button>
               </div>
             </div>
-          ) : (
-            // Webcam screen after user type selection
+          ) : userType === 'new' ? (
+            // Content for new user
             <>
+              <p className={styles.userType}>신규 사용자 모달</p>
               <video
                 ref={videoRef}
                 className={styles.webcam}
@@ -95,7 +100,32 @@ function CustomModal({ open, onClose, onProceed }) {
               <Button
                 variant="outlined"
                 color="secondary"
-                onClick={onProceed}
+                onClick={handleProceed}
+                className={styles.nextButton}
+              >
+                Next
+              </Button>
+            </>
+          ) : (
+            // Content for existing user
+            <>
+              <p className={styles.userType}>기존 사용자 모달</p>
+              <video
+                ref={videoRef}
+                className={styles.webcam}
+                autoPlay
+                playsInline
+                muted
+              />
+              <input
+                type="text"
+                placeholder="닉네임을 입력해주세요"
+                className={styles.nicknameInput}
+              />
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={handleProceed}
                 className={styles.nextButton}
               >
                 Next

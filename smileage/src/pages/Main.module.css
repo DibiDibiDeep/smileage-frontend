@@ -1,10 +1,15 @@
 :root {
-    --primary-color: #ffd1a9; /* 부드러운 오렌지 톤 */
-    --secondary-color: #ffe8a1; /* 연한 노란색 */
-    --accent-color: #f18383; /* 밝은 파스텔 핑크 */
-    --text-color: #666666; /* 연한 회색 */
-    --background-color: #fffaf0; /* 부드러운 크림색 */
-  }
+    --primary-color: #ffd1a9;
+    /* 부드러운 오렌지 톤 */
+    --secondary-color: #ffe8a1;
+    /* 연한 노란색 */
+    --accent-color: #f18383;
+    /* 밝은 파스텔 핑크 */
+    --text-color: #666666;
+    /* 연한 회색 */
+    --background-color: #fffaf0;
+    /* 부드러운 크림색 */
+}
 
 .apps {
     background: linear-gradient(to bottom, var(--background-color), var(--primary-color));
@@ -18,12 +23,12 @@
     background-image: src('./img/back.png');
 }
 
-.back{
+.back {
     display: flex;
     position: absolute;
 
 }
-  
+
 header {
     display: flex;
     justify-content: space-between;
@@ -32,7 +37,7 @@ header {
     margin-bottom: 50px;
     margin-right: 70px;
 }
-  
+
 .logo {
     display: flex;
     position: relative;
@@ -42,7 +47,7 @@ header {
     cursor: pointer;
 }
 
-.navBox{
+.navBox {
     margin: 0 auto;
     background-color: var(--accent-color);
     width: 50%;
@@ -56,13 +61,13 @@ header {
     justify-content: space-evenly;
     padding-top: 13px;
 }
-  
+
 nav a {
     color: var(--background-color);
     text-align: center;
     align-items: center;
     justify-content: space-around;
-  }
+}
 
 .container {
     display: flex;
@@ -85,7 +90,7 @@ nav a {
     flex: 1;
 }
 
-.sun{
+.sun {
     display: flex;
     position: fixed;
     width: 2%;
@@ -93,12 +98,12 @@ nav a {
     margin-left: 5px;
 }
 
-.text{
+.text {
     margin: 0 auto;
-    
+
 }
 
-.text p{
+.text p {
     display: flex;
     position: relative;
     text-align: center;
@@ -120,31 +125,32 @@ nav a {
 }
 
 .btn1 {
-  background-color: #FFA500;
-  border-radius: 25px;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  transition: background-color 0.3s, transform 0.1s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 5%;
-  width: 100%;
+    background-color: #FFA500;
+    border-radius: 25px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 5%;
+    width: 100%;
 }
 
-.btn1:hover{
+.btn1:hover {
     background-color: #FF8C00;
 }
 
-.btn1:active{
+.btn1:active {
     transform: scale(0.98);
 }
-.arrow{
+
+.arrow {
     margin-left: 8px;
     font-size: 12px;
 }
@@ -180,7 +186,7 @@ nav a {
     pointer-events: none;
 }
 
-.modalBox{
+.modalBox {
     border-radius: 40px;
 }
 
@@ -217,21 +223,21 @@ nav a {
     padding: 20px;
     margin-bottom: 20px;
     color: var(--text-color);
-  }
-  
+}
+
 .mainEmotion {
     font-size: 28px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 15px;
 }
-  
+
 .otherEmotions {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
-  
+
 .emotionItem {
     border-radius: 10px;
     padding: 10px;
@@ -245,7 +251,8 @@ nav a {
     justify-content: space-between;
 }
 
-.closeBtn, .saveBtn {
+.closeBtn,
+.saveBtn {
     background-color: white;
     border: none;
     color: #ff9f00;
@@ -257,7 +264,8 @@ nav a {
     margin: 0 10px;
 }
 
-.closeBtn:hover, .saveBtn:hover {
+.closeBtn:hover,
+.saveBtn:hover {
     background-color: #ff9f00;
 }
 
@@ -296,10 +304,13 @@ nav a {
 }
 
 .progressCircle circle:nth-child(2) {
-    stroke: white; /* 게이지 색상 */
+    stroke: white;
+    /* 게이지 색상 */
     stroke-linecap: round;
-    stroke-dashoffset: 377; /* 초기 상태에서 가려진 상태 */
-    transition: stroke-dashoffset 1s ease; /* 애니메이션 */
+    stroke-dashoffset: 377;
+    /* 초기 상태에서 가려진 상태 */
+    transition: stroke-dashoffset 1s ease;
+    /* 애니메이션 */
 }
 
 .percentage {
@@ -312,16 +323,22 @@ nav a {
 }
 
 .modalContent {
-    max-height: 400px; /* 모달 창 높이를 적절히 조절 */
-    overflow-y: auto; /* 스크롤바 추가 */
-    padding: 10px; /* 적절한 패딩 */
+    max-height: 400px;
+    /* 모달 창 높이를 적절히 조절 */
+    overflow-y: auto;
+    /* 스크롤바 추가 */
+    padding: 10px;
+    /* 적절한 패딩 */
     background-color: #fff;
     color: black;
     margin-top: 20px;
 }
 
 .chartWrapper {
-    max-width: 200px; /* 도넛 차트의 최대 너비 */
-    max-height: 200px; /* 도넛 차트의 최대 높이 */
-    margin: 0 auto; /* 중앙 정렬 */
+    max-width: 200px;
+    /* 도넛 차트의 최대 너비 */
+    max-height: 200px;
+    /* 도넛 차트의 최대 높이 */
+    margin: 0 auto;
+    /* 중앙 정렬 */
 }
