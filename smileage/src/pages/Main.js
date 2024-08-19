@@ -2,15 +2,24 @@ import React, { useEffect, useRef, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
+import ResultModal from './ResultModal';
 import styles from './Main.module.css';
 import html2canvas from 'html2canvas';
+import { useNavigate } from 'react-router-dom';
+import '../App.css';
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+
+// Chart.js elements registration
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const emotionTranslations = {
     "happy": "행복",
     "sad": "슬픔",
     "angry": "화남",
     "surprise": "놀람",
-    "neutral": "평온"
+    "neutral": "평온",
+    "fear":"두려움"
 };
 
 const translateEmotion = (emotion) => {
@@ -23,7 +32,9 @@ function Main() {
     const [showModal, setShowModal] = useState(false);
     const [countdown, setCountdown] = useState(0);
     const [capturedImage, setCapturedImage] = useState(null);
+    const [modalTitle, setModalTitle] = useState('결과');
     const [displayedProbability, setDisplayedProbability] = useState(0);
+    const navigate = useNavigate();
 
     const getUserCamera = () => {
         navigator.mediaDevices.getUserMedia({ video: true })
@@ -38,8 +49,20 @@ function Main() {
     };
 
     useEffect(() => {
+        const getUserCamera = () => {
+            navigator.mediaDevices
+                .getUserMedia({ video: true })
+                .then((stream) => {
+                    if (videoRef.current) {
+                        videoRef.current.srcObject = stream;
+                        videoRef.current.play();
+                    }
+                })
+                .catch((error) => console.log('Camera access error:', error));
+        };
+
         getUserCamera();
-    }, [videoRef]);
+    }, []);
 
     const captureImage = () => {
         setCountdown(3);
@@ -55,16 +78,22 @@ function Main() {
     };
 
     const takePicture = () => {
+        if (!videoRef.current) return;
+
         const canvas = document.createElement('canvas');
         const video = videoRef.current;
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
+
         const ctx = canvas.getContext('2d');
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
         canvas.toBlob((blob) => {
-            const file = new File([blob], 'test.jpg', { type: 'image/jpg' });
-            setCapturedImage(URL.createObjectURL(blob));
-            sendToServer(file);
+            if (blob) {
+                const file = new File([blob], 'captured_image.jpg', { type: 'image/jpg' });
+                setCapturedImage(URL.createObjectURL(blob));
+                sendToServer(file);
+            }
         }, 'image/jpg');
     };
 
@@ -86,10 +115,12 @@ function Main() {
         }
     };
 
-    const handleClose = () => {
+    const closeModal = () => {
         setShowModal(false);
-        setDisplayedProbability(0);
+        setCapturedImage(null);
+        setModalTitle('결과');
         setCountdown(0);
+        setDisplayedProbability(0);
     };
 
     const handleSave = () => {
@@ -105,6 +136,7 @@ function Main() {
     const animateProbability = (start, end) => {
         let emotionProbability = start;
         const increment = (end - start) / 100;
+
         const interval = setInterval(() => {
             emotionProbability += increment;
             if (emotionProbability >= end) {
@@ -115,41 +147,39 @@ function Main() {
         }, 30);
     };
 
+    const handleClick = () => {
+        navigate('/'); // 버튼 클릭 시 '/'으로 이동
+      };
+    
+    // Prepare data for Doughnut chart
+    const doughnutData = {
+        labels: predictions.map((prediction) => translateEmotion(prediction.class)),
+        datasets: [
+            {
+                data: predictions.map((prediction) => Math.round(prediction.probability * 100)),
+                backgroundColor: ['#ffa726', '#ffca28', '#ffee58'], // happy, sad, angry, surprise, neutral, and fear.
+                hoverBackgroundColor: ['#ffa726', '#ffca28', '#ffee58'],
+            },
+        ],
+    };
+
     return (
         <>
             <div className={styles.apps}>
+            <img src='./img/back.png' className={styles.back}/>
                 <header>
-                    <div className={styles.logo}>Smileage</div>
-                    <div className={styles.navBox}>
-                        <nav className={styles.nav}>
-                            <a href="#home">HOME</a>
-                            <a href="#apps">APPS</a>
-                            <a href="#stories">STORIES</a>
-                            <a href="#about">ABOUT</a>
-                        </nav>
-                    </div>
-                    <button className={styles.signIn}>SIGN IN</button>
+                    <div className={styles.logo} onClick={handleClick} style={{display: 'flex', left: '10%'}}>Smileage</div>
+                    <img src='./img/Sun.png' className={styles.sun}/>
                 </header>
 
                 <div className={styles.container}>
                     <div className={styles.containerBox}>
-                        {/* 왼쪽 텍스트 영역 */}
+                        <div className={styles.camBox}>
                         <div className={styles.mainText}>
                             <div className={styles.text}>
-                                <img src='./img/Sun.png' className={styles.sun}/>
-                                <img src='./img/Ball.png' className={styles.ball}/>
-                                <p>TRAINING<br />YOUR<br />FACE!</p>
-                                <div className={styles.btnBox}>
-                                    <button onClick={captureImage} className={styles.btn1}>CAPTURE
-                                    <span className={styles.arrow}>▶</span>
-                                    </button>
-                                </div>
+                                <p>TRAINING YOUR FACE!</p>
                             </div>
-                            <hr className={styles.line1} />
                         </div>
-
-                        {/* 오른쪽 비디오 영역 */}
-                        <div className={styles.camBox}>
                             <div className={styles.videoWrapper}>
                                 <video className={styles.video} ref={videoRef}></video>
                                 {countdown > 0 && (
@@ -157,12 +187,15 @@ function Main() {
                                         {countdown}
                                     </div>
                                 )}
+                                <div className={styles.btnBox}>
+                                    <button onClick={captureImage} className={styles.btn1}>CAPTURE
+                                    <span className={styles.arrow}>▶</span>
+                                    </button>
+                                </div>
                             </div>
-                            
                         </div>
                     </div>
-
-                    <Modal show={showModal} onHide={handleClose} className={styles.modalBox}>
+                    <Modal show={showModal} onHide={closeModal} className={styles.modalBox}>
                         <Modal.Body className={styles.modalContent}>
                             {capturedImage && (
                                 <div className={styles.imagePreview}>
@@ -170,23 +203,15 @@ function Main() {
                                 </div>
                             )}
                             <div className={styles.emotionResult}>
-                                <div>
-                                    Smileage #1
-                                </div>
                                 {predictions.length > 0 && (
                                     <>
                                         <div className={styles.progressCircle}>
-                                            <svg>
-                                                <circle cx="70" cy="70" r="60"></circle>
-                                                <circle
-                                                    cx="70"
-                                                    cy="70"
-                                                    r="60"
-                                                    style={{
-                                                        strokeDashoffset: `calc(377 - (377 * ${displayedProbability}) / 100)`
-                                                    }}
-                                                ></circle>
-                                            </svg>
+                                            {/* Doughnut Chart */}
+                                                {predictions.length > 0 && (
+                                                    <div className={styles.chartWrapper}>
+                                                        <Doughnut data={doughnutData} />
+                                                    </div>
+                                                )}
                                             <div className={styles.percentage}>{translateEmotion(predictions[0].class)}: {Math.round(predictions[0].probability * 100)}%</div>
                                         </div>
                                     </>
@@ -194,7 +219,7 @@ function Main() {
                             </div>
                         </Modal.Body>
                         <Modal.Footer className={styles.buttonContainer}>
-                            <Button variant="secondary" onClick={handleClose} className={styles.closeBtn}>
+                            <Button variant="secondary" onClick={closeModal} className={styles.closeBtn}>
                                 Close
                             </Button>
                             <Button variant="primary" onClick={handleSave} className={styles.saveBtn}>
