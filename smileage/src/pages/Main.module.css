@@ -15,6 +15,13 @@
     position: relative;
     overflow: hidden;
     color: var(--text-color);
+    background-image: src('./img/back.png');
+}
+
+.back{
+    display: flex;
+    position: absolute;
+
 }
   
 header {
@@ -23,20 +30,22 @@ header {
     align-items: center;
     margin-top: 30px;
     margin-bottom: 50px;
-    margin-left: 110px;
     margin-right: 70px;
 }
   
 .logo {
+    display: flex;
+    position: relative;
     font-size: 24px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .navBox{
     margin: 0 auto;
     background-color: var(--accent-color);
     width: 50%;
-    height: 100%;
+    height: 50px;
     border: none;
     border-radius: 30px;
 }
@@ -58,13 +67,12 @@ nav a {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    margin-top: -70px;
+    min-height: 100vh;
+    margin-top: -100px;
 }
 
 .containerBox {
     display: flex;
-    flex-direction: row; /* 좌우 배치 */
     align-items: center;
     width: 100%;
 }
@@ -72,34 +80,28 @@ nav a {
 .mainText {
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
     align-items: center;
     flex: 1;
-    margin-left: 120px;
 }
 
 .sun{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30%;
-}
-
-.ball{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30%;
+    position: fixed;
+    width: 2%;
+    left: 16%;
 }
 
 .text{
     margin: 0 auto;
-    margin-left: 150px;
 }
 
 .text p{
+    display: flex;
+    position: relative;
     text-align: center;
-    font-size: 40px;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
     font-weight: 700;
 }
 
@@ -127,6 +129,8 @@ nav a {
   text-transform: uppercase;
   transition: background-color 0.3s, transform 0.1s;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 5%;
+  width: 100%;
 }
 
 .btn1:hover{
@@ -141,12 +145,6 @@ nav a {
     font-size: 12px;
 }
 
-.line1 {
-    width: 80%;
-    border: 0;
-    border-top: 1px solid #dee2e6;
-    margin: 20px 0;
-}
 .camBox {
     flex: 1;
     position: relative;
@@ -156,10 +154,8 @@ nav a {
 }
 
 .videoWrapper {
-    position: relative;
     width: 100%;
     max-width: 600px;
-    right: 250px;
 }
 
 .video {
@@ -185,7 +181,7 @@ nav a {
 }
 
 .modalContent {
-    background-color: #ff9f00;
+    background: var(--primary-color);
     border-radius: 5px;
     color: white;
 }
@@ -216,7 +212,7 @@ nav a {
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 20px;
-    color: whitesmoke;
+    color: var(--text-color);
   }
   
 .mainEmotion {
@@ -287,7 +283,7 @@ nav a {
     height: 100%;
     fill: none;
     stroke-width: 20;
-    stroke: #ff9f00;
+    stroke: var(--primary-color);
     cx: 70;
     cy: 70;
     r: 60;
