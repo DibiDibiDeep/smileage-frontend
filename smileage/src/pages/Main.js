@@ -26,6 +26,8 @@ function Main() {
     const [countdown, setCountdown] = useState(0);
     const [capturedImage, setCapturedImage] = useState(null);
     const [displayedProbability, setDisplayedProbability] = useState(0);
+    const [recognizedUser, setRecognizedUser] = useState(null);
+    const [userName, setUserName] = useState('');
 
     const navigate = useNavigate();
 
@@ -43,7 +45,32 @@ function Main() {
 
     useEffect(() => {
         getUserCamera();
+        recognizeUser();
     }, [videoRef]);
+
+    const recognizeUser = async () => {
+        const video = videoRef.current;
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        
+        canvas.toBlob(async (blob) => {
+            const file = new File([blob], 'userFace.jpg', { type: 'image/jpeg' });
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await axios.post('http://localhost:8000/recognize-user', formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                });
+                setRecognizedUser(response.data.userName);
+            } catch (error) {
+                console.error('Error recognizing user:', error);
+            }
+        }, 'image/jpeg');
+    };
+
 
     const captureImage = () => {
         setCountdown(3);
@@ -137,6 +164,11 @@ function Main() {
                         <div className={styles.camBox}>
                         <div className={styles.mainText}>
                             <div className={styles.text}>
+                            {recognizedUser && (
+                    <div className={styles.welcomeMessage}>
+                        {recognizedUser.userName}님 반갑습니다!
+                    </div>
+                )}
                                 <p>TRAINING YOUR FACE!</p>
                             </div>
                         </div>
