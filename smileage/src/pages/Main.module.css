@@ -38,6 +38,7 @@ header {
     position: relative;
     font-size: 24px;
     font-weight: bold;
+    font-family: 'GloriaHallelujah';
     cursor: pointer;
 }
 
@@ -89,6 +90,7 @@ nav a {
     position: fixed;
     width: 2%;
     left: 16%;
+    margin-left: 5px;
 }
 
 .text{
@@ -103,6 +105,7 @@ nav a {
     justify-content: center;
     font-size: 50px;
     font-weight: 700;
+    font-family: 'Karla';
 }
 
 .logo1 {
@@ -266,15 +269,15 @@ nav a {
 /* 원형 게이지 스타일 */
 .progressCircle {
     position: relative;
-    width: 140px;
-    height: 140px;
+    width: 100%;
+    height: 100%;
     margin: 20px auto;
 }
 
 .progressCircle svg {
     position: relative;
-    width: 140px;
-    height: 140px;
+    width: 100%;
+    height: 100%;
     transform: rotate(-90deg);
 }
 
@@ -300,9 +303,28 @@ nav a {
 
 .percentage {
     position: absolute;
-    top: 50%;
+    top: 120%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 14px;
     font-weight: bold;
+}
+
+.modalContent {
+    max-height: 600px; /* 모달 창 높이를 적절히 조절 */
+    padding: 10px; /* 적절한 패딩 */
+    background-color: #fff;
+    color: black;
+    margin-top: 20px;
+}
+
+.chartWrapper {
+    max-width: 200px;
+    /* 도넛 차트의 최대 너비 */
+    max-height: 200px;
+    /* 도넛 차트의 최대 높이 */
+    margin: 0 auto;
+    /* 중앙 정렬 */
+    margin-left: 140px;
+    margin-top: -50px;
 }
