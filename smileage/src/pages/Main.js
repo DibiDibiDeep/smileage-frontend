@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
-import ResultModal from './ResultModal';
 import styles from './Main.module.css';
 import html2canvas from 'html2canvas';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../App.css';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -34,19 +33,18 @@ function Main() {
     const [capturedImage, setCapturedImage] = useState(null);
     const [modalTitle, setModalTitle] = useState('결과');
     const [displayedProbability, setDisplayedProbability] = useState(0);
+    const [userName, setUserName] = useState('');
+    const [mileagePoints, setMileagePoints] = useState(0);
+    const [mileageMessage, setMileageMessage] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const getUserCamera = () => {
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then((stream) => {
-                let video = videoRef.current;
-                video.srcObject = stream;
-                video.play();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
+
+    useEffect(() => {
+        if (location.state && location.state.userName) {
+            setUserName(location.state.userName);
+        }
+    }, [location]);
 
     useEffect(() => {
         const getUserCamera = () => {
@@ -60,7 +58,6 @@ function Main() {
                 })
                 .catch((error) => console.log('Camera access error:', error));
         };
-
         getUserCamera();
     }, []);
 
@@ -177,7 +174,8 @@ function Main() {
                         <div className={styles.camBox}>
                         <div className={styles.mainText}>
                             <div className={styles.text}>
-                                <p>TRAINING YOUR FACE!</p>
+                                <p className={styles.userName}>{userName}님 환영합니다!</p>
+                                <p className={styles.text1}>TRAINING YOUR FACE!</p>
                             </div>
                         </div>
                             <div className={styles.videoWrapper}>

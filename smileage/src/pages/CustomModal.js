@@ -128,6 +128,7 @@ function CustomModal({ open, onClose, onProceed }) {
       
       console.log(result.data);
       onProceed(userName);
+      navigate('/main', { state: { userName } });
     } catch (error) {
       console.error('Error registering user:', error);
       alert('사용자 등록에 실패했습니다.');
@@ -149,7 +150,7 @@ function CustomModal({ open, onClose, onProceed }) {
   const handleNext = async () => {
     if (userType === 'existing') {
       if (!videoRef.current) {
-        alert('Webcam is not available.');
+        alert('카메라가 작동하지 않습니다.');
         return;
       }
   
@@ -180,14 +181,16 @@ function CustomModal({ open, onClose, onProceed }) {
         if (response.data.recognized && response.data.userName) {
           setIsExistingUser(true);
           setRecognizedUserName(response.data.userName);
+          onProceed(response.data.userName);
+          console.log(response.data.userName)
           setTimeout(() => navigate('/main'), 2000); // Redirect after 2 seconds
         } else {
           setIsExistingUser(false);
-          alert('User not recognized. Please check the image and try again.');
+          alert('유저 인식이 되지 않았습니다. 다시 시도해주세요.');
         }
       } catch (error) {
         console.error('Error verifying user:', error);
-        alert('Error occurred during user verification.');
+        alert('등록되지 않은 유저입니다. 신규 등록해주세요.');
       }
     } else if (userType === 'new') {
       handleRegister();
