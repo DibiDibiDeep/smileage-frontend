@@ -11,6 +11,9 @@ RUN npm install
 # Copy source code
 COPY . .
 
+# 환경 변수를 설정하여 React 개발 서버를 모든 IP 주소에서 접근 가능하도록 합니다
+ENV HOST=0.0.0.0
+
 # Build the application
 RUN npm run build
 
