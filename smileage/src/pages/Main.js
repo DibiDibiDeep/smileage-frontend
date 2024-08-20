@@ -97,6 +97,7 @@ function Main() {
     const sendToServer = async (file) => {
         const formData = new FormData();
         formData.append('file', file);
+        formData.append('userName', userName);
 
         try {
             const response = await axios.post('http://localhost:8000/predict', formData, {
@@ -105,6 +106,17 @@ function Main() {
                 }
             });
             setPredictions(response.data.predictions);
+
+            if (response.data.predictions[0].class === 'happy' && response.data.predictions[0].probability >= 0.9) {
+                const mileageResponse = await axios.post('http://localhost:8000/add-mileage', { userName }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                setMileagePoints(mileageResponse.data.mileage);
+                setMileageMessage(mileageResponse.data.message);
+            }
+
             animateProbability(0, Math.round(response.data.predictions[0].probability * 100));
             setShowModal(true);
         } catch (error) {
@@ -125,7 +137,7 @@ function Main() {
         html2canvas(modalContent).then((canvas) => {
             const link = document.createElement('a');
             link.href = canvas.toDataURL('image/png');
-            link.download = 'modal-image.png';
+            link.download = 'smileage.png';
             link.click();
         });
     };
@@ -175,6 +187,9 @@ function Main() {
                         <div className={styles.mainText}>
                             <div className={styles.text}>
                                 <p className={styles.userName}>{userName}님 환영합니다!</p>
+                                {/* 마일리지 결과 표시 */}
+                                <p className={styles.message}>{mileageMessage}</p>
+                                <p className={styles.userName}>현재 마일리지: {mileagePoints}점</p>
                                 <p className={styles.text1}>TRAINING YOUR FACE!</p>
                             </div>
                         </div>
